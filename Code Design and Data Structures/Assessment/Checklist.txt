@@ -1,0 +1,63 @@
+Code Design and Data Structures Assessments					{D} = Done | {C} = Check to see if done | {X%} = X% done | {NA} = Yet to learn
+------------------------------------------------------------------------
+
+1. Implement Custom Containers
+
+{D}	Templated Double-Linked List
+		Linked List
+
+{D}	Templated Dynamic Array
+		Dynamic Array
+
+{90%}	Binary Tree Implementation
+
+------------------------------------------------------------------------
+
+2. Implement Hashing, Sorting and Search Algorithms
+
+{D}	Sort of a custom data container, such as Double Linked List, Dynamic Array or Graph
+		Linked List
+
+{D}	Search of a custom data container, such as Double Linked List, Dynamic Array or Graph
+		Linked List
+
+{D}	Implementation of custom data hashing techniques
+
+
+------------------------------------------------------------------------
+
+3. Inter-process Communication
+
+{D}	Successful completion of the Inter-process Communication exercise
+
+------------------------------------------------------------------------
+
+4. Version-controlled Game Project
+
+{D}	Creation of a game project using the C++ programming language and maintained within a Version Control repository, either from a brief provided by your teacher or via your own brief 	approved by your teacher
+	Version Control requirements include:
+{D}		Creation of a version control repository for the game before development begins
+{D}		Observation of successful use of the repository throughout development
+{NA}		Submitted screenshot showing commits made throughout development of the project, demonstrating consistent use of the Version Control software chosen
+	
+	The game must include:
+{D}		Graphical components, using a third-party library
+{D}		A Graphical User Interface
+{D}		Use of pre-made image assets
+{D}		Respond to Input devices
+
+	The source code for the game must:
+{D}		Be clearly commented and written in a clear, concise manner
+{D}		Include error handling techniques that may include function error return codes, assertions and/or exception handling
+
+
+------------------------------------------------------------------------
+
+5. Play-testing
+
+{NA}	
+Successfully take part in a Quality Assurance play-test session, submitting:
+{NA}		Documentation specifying the tests to be performed by your peers on your game
+{NA}		Recorded feedback from peers, recording the name of the person and their feedback
+
+------------------------------------------------------------------------

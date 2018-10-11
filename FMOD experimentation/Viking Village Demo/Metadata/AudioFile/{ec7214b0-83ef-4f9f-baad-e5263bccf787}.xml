@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{ec7214b0-83ef-4f9f-baad-e5263bccf787}">
+        <property name="assetPath">
+            <value>Viking Audio/metal squeak_sample1.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.242267573696145</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{811d68e0-35c3-41d5-930a-78a606825ce2}</destination>
+        </relationship>
+    </object>
+</objects>

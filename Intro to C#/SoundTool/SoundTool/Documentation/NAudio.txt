@@ -1,0 +1,5 @@
+NAudio Library used in SoundTool program.
+
+Link to NAudio Library on github: https://github.com/naudio/NAudio
+
+License: https://github.com/naudio/NAudio/blob/master/license.txt 

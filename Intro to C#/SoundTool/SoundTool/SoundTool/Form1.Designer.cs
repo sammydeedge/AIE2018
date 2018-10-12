@@ -49,14 +49,15 @@
             this.txt_KP2file = new System.Windows.Forms.TextBox();
             this.txt_KP3file = new System.Windows.Forms.TextBox();
             this.btn_KP7Toggle = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
+            this.btn_KP8Toggle = new System.Windows.Forms.Button();
+            this.btn_KP9Toggle = new System.Windows.Forms.Button();
+            this.btn_KP4Toggle = new System.Windows.Forms.Button();
+            this.btn_KP5Toggle = new System.Windows.Forms.Button();
+            this.btn_KP6Toggle = new System.Windows.Forms.Button();
+            this.btn_KP1Toggle = new System.Windows.Forms.Button();
+            this.btn_KP2Toggle = new System.Windows.Forms.Button();
+            this.btn_KP3Toggle = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lst_samplelist
@@ -242,91 +243,101 @@
             this.btn_KP7Toggle.Text = "7 Toggle";
             this.btn_KP7Toggle.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_KP8Toggle
             // 
-            this.button2.Location = new System.Drawing.Point(358, 171);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "8 Toggle";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_KP8Toggle.Location = new System.Drawing.Point(358, 171);
+            this.btn_KP8Toggle.Name = "btn_KP8Toggle";
+            this.btn_KP8Toggle.Size = new System.Drawing.Size(75, 23);
+            this.btn_KP8Toggle.TabIndex = 5;
+            this.btn_KP8Toggle.Text = "8 Toggle";
+            this.btn_KP8Toggle.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btn_KP9Toggle
             // 
-            this.button3.Location = new System.Drawing.Point(514, 171);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "9 Toggle";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_KP9Toggle.Location = new System.Drawing.Point(514, 171);
+            this.btn_KP9Toggle.Name = "btn_KP9Toggle";
+            this.btn_KP9Toggle.Size = new System.Drawing.Size(75, 23);
+            this.btn_KP9Toggle.TabIndex = 5;
+            this.btn_KP9Toggle.Text = "9 Toggle";
+            this.btn_KP9Toggle.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btn_KP4Toggle
             // 
-            this.button4.Location = new System.Drawing.Point(212, 289);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "4 Toggle";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_KP4Toggle.Location = new System.Drawing.Point(212, 289);
+            this.btn_KP4Toggle.Name = "btn_KP4Toggle";
+            this.btn_KP4Toggle.Size = new System.Drawing.Size(75, 23);
+            this.btn_KP4Toggle.TabIndex = 5;
+            this.btn_KP4Toggle.Text = "4 Toggle";
+            this.btn_KP4Toggle.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btn_KP5Toggle
             // 
-            this.button5.Location = new System.Drawing.Point(358, 289);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "5 Toggle";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btn_KP5Toggle.Location = new System.Drawing.Point(358, 289);
+            this.btn_KP5Toggle.Name = "btn_KP5Toggle";
+            this.btn_KP5Toggle.Size = new System.Drawing.Size(75, 23);
+            this.btn_KP5Toggle.TabIndex = 5;
+            this.btn_KP5Toggle.Text = "5 Toggle";
+            this.btn_KP5Toggle.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btn_KP6Toggle
             // 
-            this.button6.Location = new System.Drawing.Point(514, 289);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "6 Toggle";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btn_KP6Toggle.Location = new System.Drawing.Point(514, 289);
+            this.btn_KP6Toggle.Name = "btn_KP6Toggle";
+            this.btn_KP6Toggle.Size = new System.Drawing.Size(75, 23);
+            this.btn_KP6Toggle.TabIndex = 5;
+            this.btn_KP6Toggle.Text = "6 Toggle";
+            this.btn_KP6Toggle.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // btn_KP1Toggle
             // 
-            this.button7.Location = new System.Drawing.Point(212, 398);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 5;
-            this.button7.Text = "1 Toggle";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btn_KP1Toggle.Location = new System.Drawing.Point(212, 398);
+            this.btn_KP1Toggle.Name = "btn_KP1Toggle";
+            this.btn_KP1Toggle.Size = new System.Drawing.Size(75, 23);
+            this.btn_KP1Toggle.TabIndex = 5;
+            this.btn_KP1Toggle.Text = "1 Toggle";
+            this.btn_KP1Toggle.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // btn_KP2Toggle
             // 
-            this.button8.Location = new System.Drawing.Point(358, 398);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 5;
-            this.button8.Text = "2 Toggle";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btn_KP2Toggle.Location = new System.Drawing.Point(358, 398);
+            this.btn_KP2Toggle.Name = "btn_KP2Toggle";
+            this.btn_KP2Toggle.Size = new System.Drawing.Size(75, 23);
+            this.btn_KP2Toggle.TabIndex = 5;
+            this.btn_KP2Toggle.Text = "2 Toggle";
+            this.btn_KP2Toggle.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // btn_KP3Toggle
             // 
-            this.button9.Location = new System.Drawing.Point(514, 398);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 5;
-            this.button9.Text = "3 Toggle";
-            this.button9.UseVisualStyleBackColor = true;
+            this.btn_KP3Toggle.Location = new System.Drawing.Point(514, 398);
+            this.btn_KP3Toggle.Name = "btn_KP3Toggle";
+            this.btn_KP3Toggle.Size = new System.Drawing.Size(75, 23);
+            this.btn_KP3Toggle.TabIndex = 5;
+            this.btn_KP3Toggle.Text = "3 Toggle";
+            this.btn_KP3Toggle.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(345, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btn_KP3Toggle);
+            this.Controls.Add(this.btn_KP2Toggle);
+            this.Controls.Add(this.btn_KP6Toggle);
+            this.Controls.Add(this.btn_KP5Toggle);
+            this.Controls.Add(this.btn_KP1Toggle);
+            this.Controls.Add(this.btn_KP9Toggle);
+            this.Controls.Add(this.btn_KP4Toggle);
+            this.Controls.Add(this.btn_KP8Toggle);
             this.Controls.Add(this.btn_KP7Toggle);
             this.Controls.Add(this.txt_KP3file);
             this.Controls.Add(this.txt_KP2file);
@@ -350,6 +361,7 @@
             this.Controls.Add(this.lst_samplelist);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,14 +389,15 @@
         private System.Windows.Forms.TextBox txt_KP2file;
         private System.Windows.Forms.TextBox txt_KP3file;
         private System.Windows.Forms.Button btn_KP7Toggle;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button btn_KP8Toggle;
+        private System.Windows.Forms.Button btn_KP9Toggle;
+        private System.Windows.Forms.Button btn_KP4Toggle;
+        private System.Windows.Forms.Button btn_KP5Toggle;
+        private System.Windows.Forms.Button btn_KP6Toggle;
+        private System.Windows.Forms.Button btn_KP1Toggle;
+        private System.Windows.Forms.Button btn_KP2Toggle;
+        private System.Windows.Forms.Button btn_KP3Toggle;
+        private System.Windows.Forms.Label label1;
     }
 }
 

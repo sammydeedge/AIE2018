@@ -66,6 +66,8 @@
             this.lst_samplelist.Name = "lst_samplelist";
             this.lst_samplelist.Size = new System.Drawing.Size(118, 355);
             this.lst_samplelist.TabIndex = 1;
+            this.lst_samplelist.DragDrop += new System.Windows.Forms.DragEventHandler(this.lst_samplelist_DragDrop);
+            this.lst_samplelist.DragEnter += new System.Windows.Forms.DragEventHandler(this.lst_samplelist_DragEnter);
             // 
             // btn_addsamples
             // 
@@ -169,6 +171,7 @@
             // 
             // txt_KP7file
             // 
+            this.txt_KP7file.AllowDrop = true;
             this.txt_KP7file.Location = new System.Drawing.Point(197, 145);
             this.txt_KP7file.Name = "txt_KP7file";
             this.txt_KP7file.Size = new System.Drawing.Size(100, 20);

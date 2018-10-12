@@ -45,6 +45,19 @@ namespace SoundTool
                 }
             }
         }
+        private void lst_samplelist_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+        private void lst_samplelist_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] fileNames = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            foreach (string file in fileNames)
+            {
+                lst_samplelist.Items.Add(file);
+            }
+        }
+
 
         public class keyPressSampler
         {
@@ -55,7 +68,7 @@ namespace SoundTool
                 keyNo = i;
                 inputcode = i + 96;
                 data = null;
-                playState = SampleMode.Trigger;
+                m_samplemode = SampleMode.Trigger;
             }
             enum SampleMode
             {
@@ -95,7 +108,7 @@ namespace SoundTool
                 return new WaveOut();
             }
         }
+
         
-       
     }
 }

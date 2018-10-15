@@ -57,17 +57,16 @@
             this.btn_KP1Toggle = new System.Windows.Forms.Button();
             this.btn_KP2Toggle = new System.Windows.Forms.Button();
             this.btn_KP3Toggle = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lst_samplelist
             // 
+            this.lst_samplelist.AllowDrop = true;
             this.lst_samplelist.FormattingEnabled = true;
             this.lst_samplelist.Location = new System.Drawing.Point(27, 66);
             this.lst_samplelist.Name = "lst_samplelist";
             this.lst_samplelist.Size = new System.Drawing.Size(118, 355);
             this.lst_samplelist.TabIndex = 1;
-            this.lst_samplelist.DragDrop += new System.Windows.Forms.DragEventHandler(this.lst_samplelist_DragDrop);
             this.lst_samplelist.DragEnter += new System.Windows.Forms.DragEventHandler(this.lst_samplelist_DragEnter);
             // 
             // btn_addsamples
@@ -173,13 +172,17 @@
             // txt_KP7file
             // 
             this.txt_KP7file.AllowDrop = true;
+            this.txt_KP7file.ForeColor = System.Drawing.Color.Black;
             this.txt_KP7file.Location = new System.Drawing.Point(197, 145);
             this.txt_KP7file.Name = "txt_KP7file";
             this.txt_KP7file.Size = new System.Drawing.Size(100, 20);
             this.txt_KP7file.TabIndex = 4;
+            this.txt_KP7file.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragDrop);
+            this.txt_KP7file.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragEnter);
             // 
             // txt_KP8file
             // 
+            this.txt_KP8file.AllowDrop = true;
             this.txt_KP8file.Location = new System.Drawing.Point(345, 145);
             this.txt_KP8file.Name = "txt_KP8file";
             this.txt_KP8file.Size = new System.Drawing.Size(100, 20);
@@ -187,6 +190,7 @@
             // 
             // txt_KP9file
             // 
+            this.txt_KP9file.AllowDrop = true;
             this.txt_KP9file.Location = new System.Drawing.Point(505, 145);
             this.txt_KP9file.Name = "txt_KP9file";
             this.txt_KP9file.Size = new System.Drawing.Size(100, 20);
@@ -194,6 +198,7 @@
             // 
             // txt_KP4file
             // 
+            this.txt_KP4file.AllowDrop = true;
             this.txt_KP4file.Location = new System.Drawing.Point(197, 263);
             this.txt_KP4file.Name = "txt_KP4file";
             this.txt_KP4file.Size = new System.Drawing.Size(100, 20);
@@ -201,6 +206,7 @@
             // 
             // txt_KP5file
             // 
+            this.txt_KP5file.AllowDrop = true;
             this.txt_KP5file.Location = new System.Drawing.Point(345, 263);
             this.txt_KP5file.Name = "txt_KP5file";
             this.txt_KP5file.Size = new System.Drawing.Size(100, 20);
@@ -208,6 +214,7 @@
             // 
             // txt_KP6file
             // 
+            this.txt_KP6file.AllowDrop = true;
             this.txt_KP6file.Location = new System.Drawing.Point(505, 263);
             this.txt_KP6file.Name = "txt_KP6file";
             this.txt_KP6file.Size = new System.Drawing.Size(100, 20);
@@ -215,6 +222,7 @@
             // 
             // txt_KP1file
             // 
+            this.txt_KP1file.AllowDrop = true;
             this.txt_KP1file.Location = new System.Drawing.Point(197, 373);
             this.txt_KP1file.Name = "txt_KP1file";
             this.txt_KP1file.Size = new System.Drawing.Size(100, 20);
@@ -222,6 +230,7 @@
             // 
             // txt_KP2file
             // 
+            this.txt_KP2file.AllowDrop = true;
             this.txt_KP2file.Location = new System.Drawing.Point(345, 373);
             this.txt_KP2file.Name = "txt_KP2file";
             this.txt_KP2file.Size = new System.Drawing.Size(100, 20);
@@ -229,6 +238,7 @@
             // 
             // txt_KP3file
             // 
+            this.txt_KP3file.AllowDrop = true;
             this.txt_KP3file.Location = new System.Drawing.Point(505, 373);
             this.txt_KP3file.Name = "txt_KP3file";
             this.txt_KP3file.Size = new System.Drawing.Size(100, 20);
@@ -242,6 +252,7 @@
             this.btn_KP7Toggle.TabIndex = 5;
             this.btn_KP7Toggle.Text = "7 Toggle";
             this.btn_KP7Toggle.UseVisualStyleBackColor = true;
+            this.btn_KP7Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
             // btn_KP8Toggle
             // 
@@ -251,6 +262,7 @@
             this.btn_KP8Toggle.TabIndex = 5;
             this.btn_KP8Toggle.Text = "8 Toggle";
             this.btn_KP8Toggle.UseVisualStyleBackColor = true;
+            this.btn_KP8Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
             // btn_KP9Toggle
             // 
@@ -260,6 +272,7 @@
             this.btn_KP9Toggle.TabIndex = 5;
             this.btn_KP9Toggle.Text = "9 Toggle";
             this.btn_KP9Toggle.UseVisualStyleBackColor = true;
+            this.btn_KP9Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
             // btn_KP4Toggle
             // 
@@ -269,6 +282,7 @@
             this.btn_KP4Toggle.TabIndex = 5;
             this.btn_KP4Toggle.Text = "4 Toggle";
             this.btn_KP4Toggle.UseVisualStyleBackColor = true;
+            this.btn_KP4Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
             // btn_KP5Toggle
             // 
@@ -278,6 +292,7 @@
             this.btn_KP5Toggle.TabIndex = 5;
             this.btn_KP5Toggle.Text = "5 Toggle";
             this.btn_KP5Toggle.UseVisualStyleBackColor = true;
+            this.btn_KP5Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
             // btn_KP6Toggle
             // 
@@ -287,15 +302,18 @@
             this.btn_KP6Toggle.TabIndex = 5;
             this.btn_KP6Toggle.Text = "6 Toggle";
             this.btn_KP6Toggle.UseVisualStyleBackColor = true;
+            this.btn_KP6Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
             // btn_KP1Toggle
             // 
             this.btn_KP1Toggle.Location = new System.Drawing.Point(212, 398);
             this.btn_KP1Toggle.Name = "btn_KP1Toggle";
+            this.btn_KP1Toggle.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.btn_KP1Toggle.Size = new System.Drawing.Size(75, 23);
             this.btn_KP1Toggle.TabIndex = 5;
             this.btn_KP1Toggle.Text = "1 Toggle";
             this.btn_KP1Toggle.UseVisualStyleBackColor = true;
+            this.btn_KP1Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
             // btn_KP2Toggle
             // 
@@ -305,6 +323,7 @@
             this.btn_KP2Toggle.TabIndex = 5;
             this.btn_KP2Toggle.Text = "2 Toggle";
             this.btn_KP2Toggle.UseVisualStyleBackColor = true;
+            this.btn_KP2Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
             // btn_KP3Toggle
             // 
@@ -314,22 +333,13 @@
             this.btn_KP3Toggle.TabIndex = 5;
             this.btn_KP3Toggle.Text = "3 Toggle";
             this.btn_KP3Toggle.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(345, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "label1";
+            this.btn_KP3Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_KP3Toggle);
             this.Controls.Add(this.btn_KP2Toggle);
             this.Controls.Add(this.btn_KP6Toggle);
@@ -359,9 +369,11 @@
             this.Controls.Add(this.lbl_KP7);
             this.Controls.Add(this.btn_addsamples);
             this.Controls.Add(this.lst_samplelist);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -397,7 +409,6 @@
         private System.Windows.Forms.Button btn_KP1Toggle;
         private System.Windows.Forms.Button btn_KP2Toggle;
         private System.Windows.Forms.Button btn_KP3Toggle;
-        private System.Windows.Forms.Label label1;
     }
 }
 

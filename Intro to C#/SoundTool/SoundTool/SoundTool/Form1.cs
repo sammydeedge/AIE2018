@@ -10,15 +10,63 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using NAudio.Wave;
-using System.Windows.Forms;
+
+public class LoopStream : WaveStream
+{
+
+    WaveStream sourceStream;
+
+    public LoopStream (WaveStream sourceStream)
+    {
+        this.sourceStream = sourceStream;
+        this.EnableLooping = true;
+    }
+
+    public bool EnableLooping       { get; set; }
+
+    public override WaveFormat WaveFormat
+    {
+        get { return sourceStream.WaveFormat; }
+    }
+    public override long Length { get { return sourceStream.Length; } }
+    public override long Position
+    {
+        get { return sourceStream.Position; }
+        set { sourceStream.Position = value; }
+    }
+
+    public override int Read(byte[] buffer, int offset, int count)
+    {
+        int totalBytesRead = 0;
+
+        while (totalBytesRead < count)
+        {
+            int bytesRead = sourceStream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
+            if (bytesRead == 0)
+            {
+                if (sourceStream.Position == 0 || !EnableLooping)
+                {
+                    // something wrong with the source stream
+                    break;
+                }
+                // loop
+                sourceStream.Position = 0;
+            }
+            totalBytesRead += bytesRead;
+        }
+        return totalBytesRead;
+    }
 
 
+};
 
 namespace SoundTool
 {
     public partial class Form1 : Form
     {
+        
 
+        //class to hold path name, and filename (to use as a display name)
         public class FileDataStrings
         {
             public FileDataStrings(string path) { fullPath = path; displayName = Path.GetFileName(path); }
@@ -38,15 +86,18 @@ namespace SoundTool
                 lbl_name = lbl;
                 updateToggleText();
             }
-            FileDataStrings pathInfo;
-            bool triggerMode;
-            bool currentlyPlaying;
+            FileDataStrings pathInfo;                       //path information
+            bool triggerMode;                               //TriggerMode - true = Trigger Mode enabled; false = Gate Mode Enabled
+            bool currentlyPlaying;                          
             bool keyDown;
+
+            //Holds Associated Design items
             TextBox txt_name;
             Button btn_name;
             Label lbl_name;
 
             private IWavePlayer wavePlayer;
+            private WaveOut waveOut;
             private AudioFileReader audioFileReader;
 
             void updateToggleText ()
@@ -64,11 +115,29 @@ namespace SoundTool
 
             }
 
+            void refresh ()
+            {
+                currentlyPlaying = false;
+
+                wavePlayer = null;
+                waveOut = null;
+                audioFileReader = null;
+            }
+
+            //Debugging method
+            public void stopNow ()
+            {
+                stopPlayback();
+                currentlyPlaying = false;
+            }
+
             public void toggleClicked ()
             {
                 triggerMode = !triggerMode;
                 updateToggleText();
+                refresh();
             }
+            //Class function called when a file is dragged in
             public void fileDraggedin (string file)
             {
                 pathInfo = new FileDataStrings(file);
@@ -79,53 +148,108 @@ namespace SoundTool
                 return new WaveOut();
             }
 
-
+            //Class function used if the associated key is pressed
             public void pressKey ()
             {
-                keyDown = true;
                 lbl_name.ForeColor = System.Drawing.Color.LimeGreen;
-                if (triggerMode && pathInfo != null)
+                if (!keyDown)
                 {
-                    if (currentlyPlaying) { stopPlayback(); }
-                    startPlayback();
-                }
-                else if (!triggerMode && pathInfo != null)
-                {
-                    while (keyDown)
-                    {
-                        startPlayback();
-                    }  
+                     if (triggerMode && pathInfo != null)
+                        {
+                            if (currentlyPlaying)
+                            {
+                                stopPlayback();
+                                refresh();
+                            }
+                            startPlayback();
+                            currentlyPlaying = true;
+                        }
+                        else if (!triggerMode && pathInfo != null)
+                        {
+                            startPlayback();
+                            currentlyPlaying = true;
+                        }
+                        keyDown = true;
                 }
             }
 
+            //Class function used if the associated key is released
             public void releaseKey ()
             {
                 keyDown = false;
                 lbl_name.ForeColor = System.Drawing.Color.Black;
-                if (triggerMode)
+                if (pathInfo != null)
                 {
-                    currentlyPlaying = false;
-                }
-                else
-                {
-                    stopPlayback();
-                    currentlyPlaying = false;
+                    if (triggerMode && waveOut.PlaybackState == PlaybackState.Stopped)
+                    {
+                        stopPlayback();
+                        refresh();
+                    }
+                    if (!triggerMode)
+                    {
+                        stopPlayback();
+                        refresh();
+                        currentlyPlaying = false;
+                    }
                 }
             }
 
-           
 
-            void startPlayback()
+
+            private void startPlayback()
             {
-                wavePlayer = CreateWavePlayer();
-                audioFileReader = new AudioFileReader(pathInfo.fullPath);
-                //Add Volume Controls
-                wavePlayer.Init(audioFileReader);
-                wavePlayer.Play();
+                    if (waveOut == null && !triggerMode)
+                    {
+                        wavePlayer = CreateWavePlayer();
+                        WaveFileReader reader = new WaveFileReader(pathInfo.fullPath);
+                        LoopStream loop = new LoopStream(reader);
+                        waveOut = new WaveOut();
+                        waveOut.Init(loop);
+                        waveOut.Play();
+                    }
+                    else if (waveOut == null && triggerMode)
+                    {
+                        wavePlayer = CreateWavePlayer();
+                        audioFileReader = new AudioFileReader(pathInfo.fullPath);
+                        wavePlayer.Init(audioFileReader);
+                        waveOut = new WaveOut();
+                        waveOut.Init(audioFileReader);
+                        waveOut.Play();
+                        waveOut.PlaybackStopped += new EventHandler<StoppedEventArgs>(delegate (object sender, StoppedEventArgs e)
+                        {
+                            stopPlayback();
+                        });
+                    }
             }
             void stopPlayback()
             {
-                wavePlayer.Stop();
+                if (pathInfo != null)
+                {
+                    waveOut.Stop();
+                    waveOut.Dispose();
+                    waveOut = null;
+                    currentlyPlaying = false;
+                }
+                TidyUp();
+            }
+
+            void TidyUp()
+            {
+                if (audioFileReader != null)
+                {
+                    audioFileReader.Dispose();
+                    audioFileReader = null;
+                }
+                if (wavePlayer != null)
+                {
+                    wavePlayer.Dispose();
+                    wavePlayer = null;
+                }
+                if (waveOut != null)
+                {
+                    waveOut.Dispose();
+                    waveOut = null;
+                }
             }
         };
 
@@ -172,10 +296,14 @@ namespace SoundTool
         private void lst_samplelist_DragEnter(object sender, DragEventArgs e)
         {
             string[] fileNames = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            foreach (string file in fileNames)
+            if (fileNames != null)
             {
-                lst_samplelist.Items.Add(file);
+                foreach (string file in fileNames)
+                {
+                    lst_samplelist.Items.Add(file);
+                }
             }
+
             //e.Effect = DragDropEffects.All;
         }
 
@@ -185,6 +313,13 @@ namespace SoundTool
             if (key > 96 && key < 106)
             {
                 m_samples[key - 96].pressKey();
+            }
+            else if (key == 35)
+            {
+                for (int i = 1; i <= 9; ++i)
+                {
+                    m_samples[i].stopNow();
+                }
             }
         }
 
@@ -212,17 +347,23 @@ namespace SoundTool
             TextBox t = (TextBox)sender;
             string name = t.Name;
             int id = int.Parse(name.Substring(6, 1));
-            string fileName = (string)e.Data.GetData(DataFormats.FileDrop, false);
+            string fileName = (string)e.Data.GetData(DataFormats.StringFormat, false);
             m_samples[id].fileDraggedin(fileName);
         }
 
         private void txt_samplefile_DragEnter(object sender, DragEventArgs e)
         {
-            TextBox t = (TextBox)sender;
-            string name = t.Name;
-            int id = int.Parse(name.Substring(6, 1));
-            string fileName = (string)e.Data.GetData(DataFormats.FileDrop, false);
-            m_samples[id].fileDraggedin(fileName);
+            e.Effect = DragDropEffects.All;
+           //TextBox t = (TextBox)sender;
+           //string name = t.Name;
+           //int id = int.Parse(name.Substring(6, 1));
+           //string fileName = (string)e.Data.GetData(DataFormats.FileDrop, false);
+           //m_samples[id].fileDraggedin(fileName);
+        }
+
+        private void lst_samplelist_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (lst_samplelist.SelectedItem != null) { lst_samplelist.DoDragDrop(lst_samplelist.SelectedItem, DragDropEffects.Copy); }
         }
     }
 }

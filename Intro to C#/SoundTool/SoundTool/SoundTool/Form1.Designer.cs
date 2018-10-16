@@ -57,6 +57,8 @@
             this.btn_KP1Toggle = new System.Windows.Forms.Button();
             this.btn_KP2Toggle = new System.Windows.Forms.Button();
             this.btn_KP3Toggle = new System.Windows.Forms.Button();
+            this.btn_InputSelect = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // lst_samplelist
@@ -68,6 +70,7 @@
             this.lst_samplelist.Size = new System.Drawing.Size(118, 355);
             this.lst_samplelist.TabIndex = 1;
             this.lst_samplelist.DragEnter += new System.Windows.Forms.DragEventHandler(this.lst_samplelist_DragEnter);
+            this.lst_samplelist.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lst_samplelist_MouseDown);
             // 
             // btn_addsamples
             // 
@@ -187,6 +190,8 @@
             this.txt_KP8file.Name = "txt_KP8file";
             this.txt_KP8file.Size = new System.Drawing.Size(100, 20);
             this.txt_KP8file.TabIndex = 4;
+            this.txt_KP8file.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragDrop);
+            this.txt_KP8file.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragEnter);
             // 
             // txt_KP9file
             // 
@@ -195,6 +200,8 @@
             this.txt_KP9file.Name = "txt_KP9file";
             this.txt_KP9file.Size = new System.Drawing.Size(100, 20);
             this.txt_KP9file.TabIndex = 4;
+            this.txt_KP9file.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragDrop);
+            this.txt_KP9file.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragEnter);
             // 
             // txt_KP4file
             // 
@@ -203,6 +210,8 @@
             this.txt_KP4file.Name = "txt_KP4file";
             this.txt_KP4file.Size = new System.Drawing.Size(100, 20);
             this.txt_KP4file.TabIndex = 4;
+            this.txt_KP4file.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragDrop);
+            this.txt_KP4file.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragEnter);
             // 
             // txt_KP5file
             // 
@@ -211,6 +220,8 @@
             this.txt_KP5file.Name = "txt_KP5file";
             this.txt_KP5file.Size = new System.Drawing.Size(100, 20);
             this.txt_KP5file.TabIndex = 4;
+            this.txt_KP5file.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragDrop);
+            this.txt_KP5file.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragEnter);
             // 
             // txt_KP6file
             // 
@@ -219,6 +230,8 @@
             this.txt_KP6file.Name = "txt_KP6file";
             this.txt_KP6file.Size = new System.Drawing.Size(100, 20);
             this.txt_KP6file.TabIndex = 4;
+            this.txt_KP6file.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragDrop);
+            this.txt_KP6file.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragEnter);
             // 
             // txt_KP1file
             // 
@@ -227,6 +240,8 @@
             this.txt_KP1file.Name = "txt_KP1file";
             this.txt_KP1file.Size = new System.Drawing.Size(100, 20);
             this.txt_KP1file.TabIndex = 4;
+            this.txt_KP1file.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragDrop);
+            this.txt_KP1file.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragEnter);
             // 
             // txt_KP2file
             // 
@@ -235,6 +250,8 @@
             this.txt_KP2file.Name = "txt_KP2file";
             this.txt_KP2file.Size = new System.Drawing.Size(100, 20);
             this.txt_KP2file.TabIndex = 4;
+            this.txt_KP2file.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragDrop);
+            this.txt_KP2file.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragEnter);
             // 
             // txt_KP3file
             // 
@@ -243,6 +260,8 @@
             this.txt_KP3file.Name = "txt_KP3file";
             this.txt_KP3file.Size = new System.Drawing.Size(100, 20);
             this.txt_KP3file.TabIndex = 4;
+            this.txt_KP3file.DragDrop += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragDrop);
+            this.txt_KP3file.DragEnter += new System.Windows.Forms.DragEventHandler(this.txt_samplefile_DragEnter);
             // 
             // btn_KP7Toggle
             // 
@@ -335,11 +354,30 @@
             this.btn_KP3Toggle.UseVisualStyleBackColor = true;
             this.btn_KP3Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
+            // btn_InputSelect
+            // 
+            this.btn_InputSelect.BackColor = System.Drawing.Color.SkyBlue;
+            this.btn_InputSelect.Location = new System.Drawing.Point(628, 142);
+            this.btn_InputSelect.Name = "btn_InputSelect";
+            this.btn_InputSelect.Size = new System.Drawing.Size(160, 23);
+            this.btn_InputSelect.TabIndex = 6;
+            this.btn_InputSelect.Text = "Select Input";
+            this.btn_InputSelect.UseVisualStyleBackColor = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(185, 13);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(590, 98);
+            this.panel1.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.btn_InputSelect);
             this.Controls.Add(this.btn_KP3Toggle);
             this.Controls.Add(this.btn_KP2Toggle);
             this.Controls.Add(this.btn_KP6Toggle);
@@ -409,6 +447,8 @@
         private System.Windows.Forms.Button btn_KP1Toggle;
         private System.Windows.Forms.Button btn_KP2Toggle;
         private System.Windows.Forms.Button btn_KP3Toggle;
+        private System.Windows.Forms.Button btn_InputSelect;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

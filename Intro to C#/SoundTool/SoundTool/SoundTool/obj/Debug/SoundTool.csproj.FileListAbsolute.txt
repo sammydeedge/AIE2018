@@ -17,10 +17,10 @@ C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\Sound
 C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\bin\Debug\NAudio.dll
 C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\bin\Debug\NAudio.xml
 C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\obj\Debug\SoundTool.csprojAssemblyReference.cache
-C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\obj\Debug\SoundTool.Form1.resources
 C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\obj\Debug\SoundTool.Properties.Resources.resources
 C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\obj\Debug\SoundTool.csproj.GenerateResource.cache
 C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\obj\Debug\SoundTool.csproj.CoreCompileInputs.cache
 C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\obj\Debug\SoundTool.csproj.CopyComplete
 C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\obj\Debug\SoundTool.exe
 C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\obj\Debug\SoundTool.pdb
+C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\SoundTool\obj\Debug\LoopStream.resources

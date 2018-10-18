@@ -11,54 +11,6 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using NAudio.Wave;
 
-public class LoopStream : WaveStream
-{
-
-    WaveStream sourceStream;
-
-    public LoopStream (WaveStream sourceStream)
-    {
-        this.sourceStream = sourceStream;
-        this.EnableLooping = true;
-    }
-
-    public bool EnableLooping       { get; set; }
-
-    public override WaveFormat WaveFormat
-    {
-        get { return sourceStream.WaveFormat; }
-    }
-    public override long Length { get { return sourceStream.Length; } }
-    public override long Position
-    {
-        get { return sourceStream.Position; }
-        set { sourceStream.Position = value; }
-    }
-
-    public override int Read(byte[] buffer, int offset, int count)
-    {
-        int totalBytesRead = 0;
-
-        while (totalBytesRead < count)
-        {
-            int bytesRead = sourceStream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
-            if (bytesRead == 0)
-            {
-                if (sourceStream.Position == 0 || !EnableLooping)
-                {
-                    // something wrong with the source stream
-                    break;
-                }
-                // loop
-                sourceStream.Position = 0;
-            }
-            totalBytesRead += bytesRead;
-        }
-        return totalBytesRead;
-    }
-
-
-};
 
 namespace SoundTool
 {
@@ -257,7 +209,7 @@ namespace SoundTool
         
 
 
-
+        //Setting up
         public Form1()
         {
             InitializeComponent();
@@ -277,6 +229,7 @@ namespace SoundTool
             }            
         }
 
+        //Functions that add sameples to list (using open dialogue box)
         private void btn_addsamples_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -293,6 +246,7 @@ namespace SoundTool
                 }
             }
         }
+        //Functions that add sameples to list (using drag and drop from external files)
         private void lst_samplelist_DragEnter(object sender, DragEventArgs e)
         {
             string[] fileNames = (string[])e.Data.GetData(DataFormats.FileDrop, false);
@@ -307,6 +261,7 @@ namespace SoundTool
             //e.Effect = DragDropEffects.All;
         }
 
+        //Detects if a Key is pressed, if one that is pressed is usuable by a sampler, it calls a "pressKey" function on that instance of Sampler Data
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             char key = Convert.ToChar(e.KeyCode);
@@ -322,7 +277,7 @@ namespace SoundTool
                 }
             }
         }
-
+        //Detects if a Key is released, if one that is released is usuable by a sampler, it calls a "releaseKey" function on that instance of Sampler Data
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             char key = Convert.ToChar(e.KeyCode);
@@ -333,7 +288,7 @@ namespace SoundTool
         }
 
 
-
+        //Detects if Trigger/Gate Toggle button is clicked, and calls the 
         private void btn_Toggle_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
@@ -364,6 +319,39 @@ namespace SoundTool
         private void lst_samplelist_MouseDown(object sender, MouseEventArgs e)
         {
             if (lst_samplelist.SelectedItem != null) { lst_samplelist.DoDragDrop(lst_samplelist.SelectedItem, DragDropEffects.Copy); }
+        }
+
+
+
+        private void cmb_InputsList_Click(object sender, EventArgs e)
+        {
+            List<NAudio.Wave.WaveInCapabilities> activeInputs = new List<NAudio.Wave.WaveInCapabilities>();
+
+            for (int i = 0; i < NAudio.Wave.WaveIn.DeviceCount; ++i)
+            {
+                activeInputs.Add(NAudio.Wave.WaveIn.GetCapabilities(i));
+            }
+
+            cmb_InputsList.Items.Clear();
+
+            foreach (var device in activeInputs)
+            {
+                string item = (device.ProductName).ToString();
+                cmb_InputsList.Items.Add(item);
+            }
+        }
+
+        private void btn_RECSTOP_Click(object sender, EventArgs e)
+        {
+            if (cmb_InputsList.SelectedItem == null)
+            {
+                MessageBox.Show("Error! \n No Input Selected, Please select an Audio Input before recording");
+                return;
+            }
+
+
+            //Recording functionality
+            //Change REC to STOP
         }
     }
 }

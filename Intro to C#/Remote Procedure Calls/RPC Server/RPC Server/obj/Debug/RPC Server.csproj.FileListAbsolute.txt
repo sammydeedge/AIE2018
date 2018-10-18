@@ -1,0 +1,7 @@
+C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\Remote Procedure Calls\RPC Server\RPC Server\bin\Debug\RPC Server.exe.config
+C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\Remote Procedure Calls\RPC Server\RPC Server\bin\Debug\RPC Server.exe
+C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\Remote Procedure Calls\RPC Server\RPC Server\bin\Debug\RPC Server.pdb
+C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\Remote Procedure Calls\RPC Server\RPC Server\obj\Debug\RPC Server.csprojAssemblyReference.cache
+C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\Remote Procedure Calls\RPC Server\RPC Server\obj\Debug\RPC Server.csproj.CoreCompileInputs.cache
+C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\Remote Procedure Calls\RPC Server\RPC Server\obj\Debug\RPC Server.exe
+C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\Remote Procedure Calls\RPC Server\RPC Server\obj\Debug\RPC Server.pdb

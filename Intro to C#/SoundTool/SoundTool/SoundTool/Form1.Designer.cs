@@ -57,8 +57,14 @@
             this.btn_KP1Toggle = new System.Windows.Forms.Button();
             this.btn_KP2Toggle = new System.Windows.Forms.Button();
             this.btn_KP3Toggle = new System.Windows.Forms.Button();
-            this.btn_InputSelect = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_RECSTOP = new System.Windows.Forms.Button();
+            this.cmb_InputsList = new System.Windows.Forms.ComboBox();
+            this.lbl_REC = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lst_samplelist
@@ -67,7 +73,7 @@
             this.lst_samplelist.FormattingEnabled = true;
             this.lst_samplelist.Location = new System.Drawing.Point(27, 66);
             this.lst_samplelist.Name = "lst_samplelist";
-            this.lst_samplelist.Size = new System.Drawing.Size(118, 355);
+            this.lst_samplelist.Size = new System.Drawing.Size(118, 329);
             this.lst_samplelist.TabIndex = 1;
             this.lst_samplelist.DragEnter += new System.Windows.Forms.DragEventHandler(this.lst_samplelist_DragEnter);
             this.lst_samplelist.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lst_samplelist_MouseDown);
@@ -354,30 +360,80 @@
             this.btn_KP3Toggle.UseVisualStyleBackColor = true;
             this.btn_KP3Toggle.Click += new System.EventHandler(this.btn_Toggle_Click);
             // 
-            // btn_InputSelect
-            // 
-            this.btn_InputSelect.BackColor = System.Drawing.Color.SkyBlue;
-            this.btn_InputSelect.Location = new System.Drawing.Point(628, 142);
-            this.btn_InputSelect.Name = "btn_InputSelect";
-            this.btn_InputSelect.Size = new System.Drawing.Size(160, 23);
-            this.btn_InputSelect.TabIndex = 6;
-            this.btn_InputSelect.Text = "Select Input";
-            this.btn_InputSelect.UseVisualStyleBackColor = false;
-            // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Bisque;
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(185, 13);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(590, 98);
             this.panel1.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Bisque;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Peru;
+            this.label1.Location = new System.Drawing.Point(0, 75);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(99, 23);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "CLIP VIEW";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Pink;
+            this.panel2.Controls.Add(this.btn_RECSTOP);
+            this.panel2.Controls.Add(this.cmb_InputsList);
+            this.panel2.Controls.Add(this.lbl_REC);
+            this.panel2.Location = new System.Drawing.Point(611, 114);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(163, 169);
+            this.panel2.TabIndex = 8;
+            // 
+            // btn_RECSTOP
+            // 
+            this.btn_RECSTOP.BackColor = System.Drawing.Color.LightCoral;
+            this.btn_RECSTOP.Location = new System.Drawing.Point(14, 68);
+            this.btn_RECSTOP.Name = "btn_RECSTOP";
+            this.btn_RECSTOP.Size = new System.Drawing.Size(130, 23);
+            this.btn_RECSTOP.TabIndex = 2;
+            this.btn_RECSTOP.Text = "REC";
+            this.btn_RECSTOP.UseVisualStyleBackColor = false;
+            this.btn_RECSTOP.Click += new System.EventHandler(this.btn_RECSTOP_Click);
+            // 
+            // cmb_InputsList
+            // 
+            this.cmb_InputsList.FormattingEnabled = true;
+            this.cmb_InputsList.Location = new System.Drawing.Point(4, 30);
+            this.cmb_InputsList.Name = "cmb_InputsList";
+            this.cmb_InputsList.Size = new System.Drawing.Size(156, 21);
+            this.cmb_InputsList.TabIndex = 1;
+            this.cmb_InputsList.Text = "Input Selection";
+            this.cmb_InputsList.Click += new System.EventHandler(this.cmb_InputsList_Click);
+            // 
+            // lbl_REC
+            // 
+            this.lbl_REC.AutoSize = true;
+            this.lbl_REC.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_REC.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbl_REC.Font = new System.Drawing.Font("Century Gothic", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_REC.ForeColor = System.Drawing.Color.Crimson;
+            this.lbl_REC.Location = new System.Drawing.Point(0, 146);
+            this.lbl_REC.Name = "lbl_REC";
+            this.lbl_REC.Size = new System.Drawing.Size(144, 23);
+            this.lbl_REC.TabIndex = 0;
+            this.lbl_REC.Text = "RECORD MENU\r\n";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btn_InputSelect);
             this.Controls.Add(this.btn_KP3Toggle);
             this.Controls.Add(this.btn_KP2Toggle);
             this.Controls.Add(this.btn_KP6Toggle);
@@ -412,6 +468,10 @@
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -447,8 +507,12 @@
         private System.Windows.Forms.Button btn_KP1Toggle;
         private System.Windows.Forms.Button btn_KP2Toggle;
         private System.Windows.Forms.Button btn_KP3Toggle;
-        private System.Windows.Forms.Button btn_InputSelect;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_REC;
+        private System.Windows.Forms.ComboBox cmb_InputsList;
+        private System.Windows.Forms.Button btn_RECSTOP;
     }
 }
 

@@ -130,7 +130,7 @@ namespace SoundTool
             {
                 keyDown = false;
                 lbl_name.ForeColor = System.Drawing.Color.Black;
-                if (pathInfo != null)
+                if (pathInfo != null && waveOut != null)
                 {
                     if (triggerMode && waveOut.PlaybackState == PlaybackState.Stopped)
                     {
@@ -309,11 +309,11 @@ namespace SoundTool
         private void txt_samplefile_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.All;
-           //TextBox t = (TextBox)sender;
-           //string name = t.Name;
-           //int id = int.Parse(name.Substring(6, 1));
-           //string fileName = (string)e.Data.GetData(DataFormats.FileDrop, false);
-           //m_samples[id].fileDraggedin(fileName);
+            //TextBox t = (TextBox)sender;
+            //string name = t.Name;
+            //int id = int.Parse(name.Substring(6, 1));
+            //string fileName = (string)e.Data.GetData(DataFormats.FileDrop, false);
+            //m_samples[id].fileDraggedin(fileName);
         }
 
         private void lst_samplelist_MouseDown(object sender, MouseEventArgs e)
@@ -321,6 +321,12 @@ namespace SoundTool
             if (lst_samplelist.SelectedItem != null) { lst_samplelist.DoDragDrop(lst_samplelist.SelectedItem, DragDropEffects.Copy); }
         }
 
+        private void waveViewer_DragDrop(object sender, DragEventArgs e)
+        {
+            string fileName = (string)e.Data.GetData(DataFormats.Text);
+
+            waveViewer.WaveStream = new NAudio.Wave.WaveFileReader(fileName);
+        }
 
 
         private void cmb_InputsList_Click(object sender, EventArgs e)
@@ -341,17 +347,74 @@ namespace SoundTool
             }
         }
 
+        private NAudio.Wave.WaveIn InputStream = null;
+        private NAudio.Wave.DirectSoundOut DirectOut = null;
+        bool isRecording = false;
+        NAudio.Wave.WaveFileWriter waveWriter = null;
+
+
         private void btn_RECSTOP_Click(object sender, EventArgs e)
         {
-            if (cmb_InputsList.SelectedItem == null)
+            if (!isRecording)
             {
-                MessageBox.Show("Error! \n No Input Selected, Please select an Audio Input before recording");
-                return;
+                 if (cmb_InputsList.SelectedItem == null)
+                 {
+                     MessageBox.Show("Error! \n No Input Selected, Please select an Audio Input before recording");
+                     return;
+                 }
+
+                SaveFileDialog save = new SaveFileDialog();
+                save.Filter = "Wave File(*.wav)|*.wav;";
+                if (save.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                {
+                    return;
+                }
+                else
+                {
+                    lst_samplelist.Items.Add(save.FileName);
+                }
+
+                int deviceNumber = cmb_InputsList.SelectedIndex;
+
+                InputStream = new NAudio.Wave.WaveIn();
+                InputStream.DeviceNumber = deviceNumber;
+                InputStream.WaveFormat = new NAudio.Wave.WaveFormat(44100, NAudio.Wave.WaveIn.GetCapabilities(deviceNumber).Channels);
+
+                InputStream.DataAvailable += new EventHandler<NAudio.Wave.WaveInEventArgs>(InputStream_DataAvailable);
+                waveWriter = new NAudio.Wave.WaveFileWriter(save.FileName, InputStream.WaveFormat);
+
+                InputStream.StartRecording();
+
+                btn_RECSTOP.Text = "STOP";
+                isRecording = true;
             }
-
-
-            //Recording functionality
-            //Change REC to STOP
+            else
+            {
+                if (InputStream != null)
+                {
+                    InputStream.StopRecording();
+                    InputStream.Dispose();
+                    InputStream = null;
+                }
+                if (waveWriter != null)
+                {
+                    waveWriter.Dispose();
+                    waveWriter = null;
+                }
+                btn_RECSTOP.Text = "REC";
+                isRecording = false;
+            }
+           
         }
+
+        private void InputStream_DataAvailable(object sender, NAudio.Wave.WaveInEventArgs e)
+        {
+            if (waveWriter == null) return;
+
+            waveWriter.Write(e.Buffer, 0, e.BytesRecorded);
+            waveWriter.Flush();
+        }
+
+
     }
 }

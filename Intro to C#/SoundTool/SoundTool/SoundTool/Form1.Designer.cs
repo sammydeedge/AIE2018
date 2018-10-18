@@ -58,6 +58,7 @@
             this.btn_KP2Toggle = new System.Windows.Forms.Button();
             this.btn_KP3Toggle = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.waveViewer = new NAudio.Gui.WaveViewer();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btn_RECSTOP = new System.Windows.Forms.Button();
@@ -362,12 +363,30 @@
             // 
             // panel1
             // 
+            this.panel1.AllowDrop = true;
             this.panel1.BackColor = System.Drawing.Color.Bisque;
+            this.panel1.Controls.Add(this.waveViewer);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(185, 13);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(590, 98);
             this.panel1.TabIndex = 7;
+            this.panel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.waveViewer_DragDrop);
+            this.panel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.waveViewer_DragDrop);
+            // 
+            // waveViewer
+            // 
+            this.waveViewer.AllowDrop = true;
+            this.waveViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.waveViewer.Location = new System.Drawing.Point(0, 0);
+            this.waveViewer.Name = "waveViewer";
+            this.waveViewer.SamplesPerPixel = 128;
+            this.waveViewer.Size = new System.Drawing.Size(590, 75);
+            this.waveViewer.StartPosition = ((long)(0));
+            this.waveViewer.TabIndex = 1;
+            this.waveViewer.WaveStream = null;
+            this.waveViewer.DragDrop += new System.Windows.Forms.DragEventHandler(this.waveViewer_DragDrop);
+            this.waveViewer.DragEnter += new System.Windows.Forms.DragEventHandler(this.waveViewer_DragDrop);
             // 
             // label1
             // 
@@ -513,6 +532,7 @@
         private System.Windows.Forms.Label lbl_REC;
         private System.Windows.Forms.ComboBox cmb_InputsList;
         private System.Windows.Forms.Button btn_RECSTOP;
+        private NAudio.Gui.WaveViewer waveViewer;
     }
 }
 

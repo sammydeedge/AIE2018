@@ -59,13 +59,21 @@
             this.btn_KP3Toggle = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.waveViewer = new NAudio.Gui.WaveViewer();
+            this.waveViewer1 = new NAudio.Gui.WaveViewer();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btn_RECSTOP = new System.Windows.Forms.Button();
             this.cmb_InputsList = new System.Windows.Forms.ComboBox();
-            this.lbl_REC = new System.Windows.Forms.Label();
+            this.lbl_REC_Audio = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btn_MIDI_PLAY = new System.Windows.Forms.Button();
+            this.btn_MIDI_RECSTOP = new System.Windows.Forms.Button();
+            this.cmb_MIDI_FileList = new System.Windows.Forms.ComboBox();
+            this.lbl_MIDI = new System.Windows.Forms.Label();
+            this.cmb_MIDI_InList = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lst_samplelist
@@ -74,7 +82,7 @@
             this.lst_samplelist.FormattingEnabled = true;
             this.lst_samplelist.Location = new System.Drawing.Point(27, 66);
             this.lst_samplelist.Name = "lst_samplelist";
-            this.lst_samplelist.Size = new System.Drawing.Size(118, 329);
+            this.lst_samplelist.Size = new System.Drawing.Size(118, 342);
             this.lst_samplelist.TabIndex = 1;
             this.lst_samplelist.DragEnter += new System.Windows.Forms.DragEventHandler(this.lst_samplelist_DragEnter);
             this.lst_samplelist.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lst_samplelist_MouseDown);
@@ -366,6 +374,7 @@
             this.panel1.AllowDrop = true;
             this.panel1.BackColor = System.Drawing.Color.Bisque;
             this.panel1.Controls.Add(this.waveViewer);
+            this.panel1.Controls.Add(this.waveViewer1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(185, 13);
             this.panel1.Name = "panel1";
@@ -376,17 +385,26 @@
             // 
             // waveViewer
             // 
-            this.waveViewer.AllowDrop = true;
             this.waveViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.waveViewer.Location = new System.Drawing.Point(0, 0);
             this.waveViewer.Name = "waveViewer";
             this.waveViewer.SamplesPerPixel = 128;
             this.waveViewer.Size = new System.Drawing.Size(590, 75);
             this.waveViewer.StartPosition = ((long)(0));
-            this.waveViewer.TabIndex = 1;
+            this.waveViewer.TabIndex = 3;
             this.waveViewer.WaveStream = null;
             this.waveViewer.DragDrop += new System.Windows.Forms.DragEventHandler(this.waveViewer_DragDrop);
             this.waveViewer.DragEnter += new System.Windows.Forms.DragEventHandler(this.waveViewer_DragDrop);
+            // 
+            // waveViewer1
+            // 
+            this.waveViewer1.Location = new System.Drawing.Point(392, 48);
+            this.waveViewer1.Name = "waveViewer1";
+            this.waveViewer1.SamplesPerPixel = 128;
+            this.waveViewer1.Size = new System.Drawing.Size(150, 150);
+            this.waveViewer1.StartPosition = ((long)(0));
+            this.waveViewer1.TabIndex = 2;
+            this.waveViewer1.WaveStream = null;
             // 
             // label1
             // 
@@ -406,16 +424,16 @@
             this.panel2.BackColor = System.Drawing.Color.Pink;
             this.panel2.Controls.Add(this.btn_RECSTOP);
             this.panel2.Controls.Add(this.cmb_InputsList);
-            this.panel2.Controls.Add(this.lbl_REC);
-            this.panel2.Location = new System.Drawing.Point(611, 114);
+            this.panel2.Controls.Add(this.lbl_REC_Audio);
+            this.panel2.Location = new System.Drawing.Point(611, 130);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(163, 169);
+            this.panel2.Size = new System.Drawing.Size(164, 109);
             this.panel2.TabIndex = 8;
             // 
             // btn_RECSTOP
             // 
             this.btn_RECSTOP.BackColor = System.Drawing.Color.LightCoral;
-            this.btn_RECSTOP.Location = new System.Drawing.Point(14, 68);
+            this.btn_RECSTOP.Location = new System.Drawing.Point(15, 60);
             this.btn_RECSTOP.Name = "btn_RECSTOP";
             this.btn_RECSTOP.Size = new System.Drawing.Size(130, 23);
             this.btn_RECSTOP.TabIndex = 2;
@@ -426,31 +444,102 @@
             // cmb_InputsList
             // 
             this.cmb_InputsList.FormattingEnabled = true;
-            this.cmb_InputsList.Location = new System.Drawing.Point(4, 30);
+            this.cmb_InputsList.Location = new System.Drawing.Point(8, 30);
             this.cmb_InputsList.Name = "cmb_InputsList";
-            this.cmb_InputsList.Size = new System.Drawing.Size(156, 21);
+            this.cmb_InputsList.Size = new System.Drawing.Size(152, 21);
             this.cmb_InputsList.TabIndex = 1;
             this.cmb_InputsList.Text = "Input Selection";
             this.cmb_InputsList.Click += new System.EventHandler(this.cmb_InputsList_Click);
             // 
-            // lbl_REC
+            // lbl_REC_Audio
             // 
-            this.lbl_REC.AutoSize = true;
-            this.lbl_REC.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_REC.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbl_REC.Font = new System.Drawing.Font("Century Gothic", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_REC.ForeColor = System.Drawing.Color.Crimson;
-            this.lbl_REC.Location = new System.Drawing.Point(0, 146);
-            this.lbl_REC.Name = "lbl_REC";
-            this.lbl_REC.Size = new System.Drawing.Size(144, 23);
-            this.lbl_REC.TabIndex = 0;
-            this.lbl_REC.Text = "RECORD MENU\r\n";
+            this.lbl_REC_Audio.AutoSize = true;
+            this.lbl_REC_Audio.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_REC_Audio.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbl_REC_Audio.Font = new System.Drawing.Font("Century Gothic", 13F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_REC_Audio.ForeColor = System.Drawing.Color.Crimson;
+            this.lbl_REC_Audio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_REC_Audio.Location = new System.Drawing.Point(0, 87);
+            this.lbl_REC_Audio.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_REC_Audio.Name = "lbl_REC_Audio";
+            this.lbl_REC_Audio.Size = new System.Drawing.Size(161, 22);
+            this.lbl_REC_Audio.TabIndex = 0;
+            this.lbl_REC_Audio.Text = "REC AUDIO MENU";
+            this.lbl_REC_Audio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.panel3.Controls.Add(this.btn_MIDI_PLAY);
+            this.panel3.Controls.Add(this.btn_MIDI_RECSTOP);
+            this.panel3.Controls.Add(this.cmb_MIDI_InList);
+            this.panel3.Controls.Add(this.cmb_MIDI_FileList);
+            this.panel3.Controls.Add(this.lbl_MIDI);
+            this.panel3.Location = new System.Drawing.Point(615, 245);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(160, 176);
+            this.panel3.TabIndex = 9;
+            // 
+            // btn_MIDI_PLAY
+            // 
+            this.btn_MIDI_PLAY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btn_MIDI_PLAY.Location = new System.Drawing.Point(11, 125);
+            this.btn_MIDI_PLAY.Name = "btn_MIDI_PLAY";
+            this.btn_MIDI_PLAY.Size = new System.Drawing.Size(130, 23);
+            this.btn_MIDI_PLAY.TabIndex = 2;
+            this.btn_MIDI_PLAY.Text = "PLAY";
+            this.btn_MIDI_PLAY.UseVisualStyleBackColor = false;
+            this.btn_MIDI_PLAY.Click += new System.EventHandler(this.btn_RECSTOP_Click);
+            // 
+            // btn_MIDI_RECSTOP
+            // 
+            this.btn_MIDI_RECSTOP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btn_MIDI_RECSTOP.Location = new System.Drawing.Point(11, 40);
+            this.btn_MIDI_RECSTOP.Name = "btn_MIDI_RECSTOP";
+            this.btn_MIDI_RECSTOP.Size = new System.Drawing.Size(130, 23);
+            this.btn_MIDI_RECSTOP.TabIndex = 2;
+            this.btn_MIDI_RECSTOP.Text = "REC";
+            this.btn_MIDI_RECSTOP.UseVisualStyleBackColor = false;
+            this.btn_MIDI_RECSTOP.Click += new System.EventHandler(this.btn_MIDI_RECSTOP_Click);
+            // 
+            // cmb_MIDI_FileList
+            // 
+            this.cmb_MIDI_FileList.FormattingEnabled = true;
+            this.cmb_MIDI_FileList.Location = new System.Drawing.Point(4, 97);
+            this.cmb_MIDI_FileList.Name = "cmb_MIDI_FileList";
+            this.cmb_MIDI_FileList.Size = new System.Drawing.Size(152, 21);
+            this.cmb_MIDI_FileList.TabIndex = 1;
+            this.cmb_MIDI_FileList.Text = "Select MIDI File for Playing";
+            this.cmb_MIDI_FileList.Click += new System.EventHandler(this.cmb_MIDI_FileList_Click);
+            // 
+            // lbl_MIDI
+            // 
+            this.lbl_MIDI.AutoSize = true;
+            this.lbl_MIDI.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbl_MIDI.Font = new System.Drawing.Font("Century Gothic", 12.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_MIDI.ForeColor = System.Drawing.Color.Teal;
+            this.lbl_MIDI.Location = new System.Drawing.Point(0, 155);
+            this.lbl_MIDI.Name = "lbl_MIDI";
+            this.lbl_MIDI.Size = new System.Drawing.Size(100, 21);
+            this.lbl_MIDI.TabIndex = 0;
+            this.lbl_MIDI.Text = "MIDI MENU";
+            // 
+            // cmb_MIDI_InList
+            // 
+            this.cmb_MIDI_InList.FormattingEnabled = true;
+            this.cmb_MIDI_InList.Location = new System.Drawing.Point(3, 13);
+            this.cmb_MIDI_InList.Name = "cmb_MIDI_InList";
+            this.cmb_MIDI_InList.Size = new System.Drawing.Size(152, 21);
+            this.cmb_MIDI_InList.TabIndex = 1;
+            this.cmb_MIDI_InList.Text = "Select MIDI In Device";
+            this.cmb_MIDI_InList.Click += new System.EventHandler(this.cmb_MIDI_InList_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_KP3Toggle);
@@ -491,6 +580,8 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -529,10 +620,17 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lbl_REC;
+        private System.Windows.Forms.Label lbl_REC_Audio;
         private System.Windows.Forms.ComboBox cmb_InputsList;
         private System.Windows.Forms.Button btn_RECSTOP;
         private NAudio.Gui.WaveViewer waveViewer;
+        private NAudio.Gui.WaveViewer waveViewer1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btn_MIDI_RECSTOP;
+        private System.Windows.Forms.ComboBox cmb_MIDI_FileList;
+        private System.Windows.Forms.Label lbl_MIDI;
+        private System.Windows.Forms.Button btn_MIDI_PLAY;
+        private System.Windows.Forms.ComboBox cmb_MIDI_InList;
     }
 }
 

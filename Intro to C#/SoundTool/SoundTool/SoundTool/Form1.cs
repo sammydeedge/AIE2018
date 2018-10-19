@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using NAudio.Wave;
+using NAudio.Midi;
 
 
 namespace SoundTool
 {
     public partial class Form1 : Form
     {
-        
+        bool isMIDIRecording = false;
 
         //class to hold path name, and filename (to use as a display name)
         public class FileDataStrings
@@ -42,6 +43,7 @@ namespace SoundTool
             bool triggerMode;                               //TriggerMode - true = Trigger Mode enabled; false = Gate Mode Enabled
             bool currentlyPlaying;                          
             bool keyDown;
+            
 
             //Holds Associated Design items
             TextBox txt_name;
@@ -325,6 +327,7 @@ namespace SoundTool
         {
             string fileName = (string)e.Data.GetData(DataFormats.Text);
 
+            waveViewer.SamplesPerPixel = 1200;
             waveViewer.WaveStream = new NAudio.Wave.WaveFileReader(fileName);
         }
 
@@ -416,5 +419,93 @@ namespace SoundTool
         }
 
 
+        
+        Dictionary<TimeSpan, int> m_MidiData = new Dictionary<TimeSpan, int>();
+        //private void btn_MIDI_RECSTOP_Click(object sender, EventArgs e)
+        //{
+        //    System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
+        //    if (!isMIDIRecording)
+        //    {
+        //        btn_MIDI_RECSTOP.Text = "STOP";
+        //        isMIDIRecording = true;
+
+        //        SaveFileDialog save = new SaveFileDialog();
+        //        save.InitialDirectory = @"C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\MIDIFiles";
+        //        save.Filter = "Text File *.txt|*.txt;";
+        //        if (save.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+        //        {
+        //            return;
+        //        }
+
+        //        KeyEventArgs Ke = new KeyEventArgs(new Keys());
+
+        //        char key = Convert.ToChar(Ke.KeyCode);
+        //        if (key > 96 && key < 106)
+        //        {
+        //            m_MidiData.Add(stopwatch.Elapsed, (key - 96));
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        stopwatch.Stop();
+        //        m_MidiData.Add(stopwatch.Elapsed, 285);
+        //        List<string> MIDIstring = new List<string>();
+        //        foreach (KeyValuePair<TimeSpan, int> entry in m_MidiData)
+        //        {
+        //            string MIDIstring_entry = entry.Key + " " + entry.Value;
+        //            MIDIstring.Add(MIDIstring_entry);
+        //        }
+        //        MIDIstring.ToArray();
+
+        //        System.IO.File.WriteAllLines("scores.txt", MIDIstring);
+        //        btn_MIDI_RECSTOP.Text = "REC";
+        //        isMIDIRecording = false;
+        //    }
+
+        //}
+
+        private void btn_MIDI_RECSTOP_Click(object sender, EventArgs e)
+        {
+            if (!isMIDIRecording)
+            {
+               //MidiIn(deviceNumber) how do I find device number
+            }
+
+            else
+            {
+               
+            }
+
+        }
+
+
+
+        private void cmb_MIDI_FileList_Click(object sender, EventArgs e)
+        {
+            List<string> MIDIs = new List<string>();
+
+            DirectoryInfo dir = new DirectoryInfo(@"C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\MIDIFiles");
+            FileInfo[] Files = dir.GetFiles();
+
+            cmb_MIDI_FileList.Items.Clear();
+
+            foreach(FileInfo file in Files)
+            {
+                cmb_MIDI_FileList.Items.Add(file);
+            }
+        }
+
+        private void cmb_MIDI_InList_Click(object sender, EventArgs e)
+        {
+            for (int device = 0; device < MidiIn.NumberOfDevices; device++)
+            {
+                cmb_MIDI_InList.Items.Add(MidiIn.DeviceInfo(device).ProductName);
+            }
+            if (cmb_MIDI_InList.Items.Count > 0)
+            {
+                cmb_MIDI_InList.SelectedIndex = 0;
+            }
+        }
     }
 }

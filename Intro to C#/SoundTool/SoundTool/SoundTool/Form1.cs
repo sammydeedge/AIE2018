@@ -11,13 +11,14 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using NAudio.Wave;
 using NAudio.Midi;
-
+using System.Xml.Serialization;
 
 namespace SoundTool
 {
     public partial class Form1 : Form
     {
         bool isMIDIRecording = false;
+
 
         //class to hold path name, and filename (to use as a display name)
         public class FileDataStrings
@@ -208,7 +209,13 @@ namespace SoundTool
         };
 
         Dictionary<int, SamplerData> m_samples = new Dictionary<int, SamplerData>();
-        
+
+
+        public class SaveData
+        {
+            public MIDIKeyFrame[] data;
+        }
+
 
 
         //Setting up
@@ -231,13 +238,27 @@ namespace SoundTool
             }            
         }
 
+
+        [Serializable]
+        public class MIDIKeyFrame
+        {
+            public MIDIKeyFrame() {  }
+            public MIDIKeyFrame (TimeSpan currentTime, bool keyDown, int keyID) { ElapsedTime = currentTime; isKeyPressed = keyDown; sampleNo = keyID; }
+
+            public TimeSpan ElapsedTime { get; set; }
+            public bool isKeyPressed { get; set; }
+            public int sampleNo { get; set; }
+        }
+
+        List<MIDIKeyFrame> MIDIRecording = new List<MIDIKeyFrame>();
+
         //Functions that add sameples to list (using open dialogue box)
         private void btn_addsamples_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "Audio Files(*.wav;*.mp3)|*.wav;*.mp3";
-                openFileDialog.RestoreDirectory = true;
+                openFileDialog.InitialDirectory = @"C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\audiofiles";
                 openFileDialog.Multiselect = true;
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -264,12 +285,19 @@ namespace SoundTool
         }
 
         //Detects if a Key is pressed, if one that is pressed is usuable by a sampler, it calls a "pressKey" function on that instance of Sampler Data
+        
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             char key = Convert.ToChar(e.KeyCode);
             if (key > 96 && key < 106)
             {
                 m_samples[key - 96].pressKey();
+                if (isMIDIRecording)
+                {
+                    MIDIKeyFrame note = new MIDIKeyFrame(MIDITimer.Elapsed, true, (key - 96));
+                    MIDIRecording.Add(note);
+                }
             }
             else if (key == 35)
             {
@@ -286,6 +314,11 @@ namespace SoundTool
             if (key > 96 && key < 106)
             {
                 m_samples[key - 96].releaseKey();
+                if (isMIDIRecording)
+                {
+                    MIDIKeyFrame note = new MIDIKeyFrame(MIDITimer.Elapsed, false, (key - 96));
+                    MIDIRecording.Add(note);
+                }
             }
         }
 
@@ -355,6 +388,8 @@ namespace SoundTool
         bool isRecording = false;
         NAudio.Wave.WaveFileWriter waveWriter = null;
 
+   
+
 
         private void btn_RECSTOP_Click(object sender, EventArgs e)
         {
@@ -418,9 +453,6 @@ namespace SoundTool
             waveWriter.Flush();
         }
 
-
-        
-        Dictionary<TimeSpan, int> m_MidiData = new Dictionary<TimeSpan, int>();
         //private void btn_MIDI_RECSTOP_Click(object sender, EventArgs e)
         //{
         //    System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
@@ -465,16 +497,43 @@ namespace SoundTool
 
         //}
 
+
+        System.Diagnostics.Stopwatch MIDITimer = new System.Diagnostics.Stopwatch();
         private void btn_MIDI_RECSTOP_Click(object sender, EventArgs e)
         {
             if (!isMIDIRecording)
             {
-               //MidiIn(deviceNumber) how do I find device number
+                isMIDIRecording = true;
+                MIDITimer.Start();
+                btn_MIDI_RECSTOP.Text = "STOP";
             }
 
             else
             {
-               
+                isMIDIRecording = false;
+                MIDIKeyFrame EndNote = new MIDIKeyFrame(MIDITimer.Elapsed, true, 10);
+                MIDIRecording.Add(EndNote);
+                MIDITimer.Stop();
+                btn_MIDI_RECSTOP.Text = "REC";
+
+                XmlSerializer serialiser = new XmlSerializer(typeof(SaveData));
+                
+
+                SaveFileDialog save = new SaveFileDialog();
+                save.InitialDirectory = @"C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\MIDIFiles";
+                save.Filter = "XML File *.xml|*.xml;";
+                if (save.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                {
+                    return;
+                }
+                string saveName = save.FileName;
+                TextWriter writer = new StreamWriter(saveName);
+
+                SaveData saveData = new SaveData();
+                saveData.data = MIDIRecording.ToArray();
+
+                serialiser.Serialize(writer, saveData);
+                writer.Close();
             }
 
         }
@@ -506,6 +565,38 @@ namespace SoundTool
             {
                 cmb_MIDI_InList.SelectedIndex = 0;
             }
+        }
+
+        private void btn_MIDI_PLAY_Click(object sender, EventArgs e)
+        {
+            if (cmb_MIDI_FileList.Text == "Select MIDI File for Playing") { MessageBox.Show("INVALID ENTRY! \n No MIDI File Selected!"); return;  }
+            //Load MIDI File
+            string fullPath = @"C:\Users\s182378\Documents\Code\repositories\AIE2018\Intro to C#\SoundTool\SoundTool\MIDIFiles\" + cmb_MIDI_FileList.Text;
+            Stream stream = File.Open(fullPath, FileMode.Open);
+            XmlSerializer serialiser = new XmlSerializer(typeof(List<MIDIKeyFrame>));
+            SaveData SaveFile = null;
+            SaveFile = (SaveData)serialiser.Deserialize(stream);
+            MIDIKeyFrame[] MIDIFile = SaveFile.data;
+            
+
+            System.Diagnostics.Stopwatch MIDI_absTime = System.Diagnostics.Stopwatch.StartNew();
+            while (!(MIDIFile.Count == 0))
+            {
+                TimeSpan checkTime = MIDIFile[0].ElapsedTime;
+                TimeSpan currentTime = MIDI_absTime.Elapsed;
+                if (currentTime >= checkTime)
+                {
+                    int sampleno = MIDIFile[0].sampleNo;
+                    if (MIDIFile[0].isKeyPressed)
+                    {
+                        if (sampleno == 10) { return; }
+                        else { m_samples[sampleno].pressKey(); }
+                    }
+                    else { m_samples[sampleno].releaseKey(); }
+                    MIDIFile.RemoveAt(0);
+                }
+            }
+        stream.Close();
         }
     }
 }

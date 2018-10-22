@@ -68,9 +68,9 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btn_MIDI_PLAY = new System.Windows.Forms.Button();
             this.btn_MIDI_RECSTOP = new System.Windows.Forms.Button();
+            this.cmb_MIDI_InList = new System.Windows.Forms.ComboBox();
             this.cmb_MIDI_FileList = new System.Windows.Forms.ComboBox();
             this.lbl_MIDI = new System.Windows.Forms.Label();
-            this.cmb_MIDI_InList = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -489,7 +489,7 @@
             this.btn_MIDI_PLAY.TabIndex = 2;
             this.btn_MIDI_PLAY.Text = "PLAY";
             this.btn_MIDI_PLAY.UseVisualStyleBackColor = false;
-            this.btn_MIDI_PLAY.Click += new System.EventHandler(this.btn_RECSTOP_Click);
+            this.btn_MIDI_PLAY.Click += new System.EventHandler(this.btn_MIDI_PLAY_Click);
             // 
             // btn_MIDI_RECSTOP
             // 
@@ -501,6 +501,16 @@
             this.btn_MIDI_RECSTOP.Text = "REC";
             this.btn_MIDI_RECSTOP.UseVisualStyleBackColor = false;
             this.btn_MIDI_RECSTOP.Click += new System.EventHandler(this.btn_MIDI_RECSTOP_Click);
+            // 
+            // cmb_MIDI_InList
+            // 
+            this.cmb_MIDI_InList.FormattingEnabled = true;
+            this.cmb_MIDI_InList.Location = new System.Drawing.Point(3, 13);
+            this.cmb_MIDI_InList.Name = "cmb_MIDI_InList";
+            this.cmb_MIDI_InList.Size = new System.Drawing.Size(152, 21);
+            this.cmb_MIDI_InList.TabIndex = 1;
+            this.cmb_MIDI_InList.Text = "Select MIDI In Device";
+            this.cmb_MIDI_InList.Click += new System.EventHandler(this.cmb_MIDI_InList_Click);
             // 
             // cmb_MIDI_FileList
             // 
@@ -523,16 +533,6 @@
             this.lbl_MIDI.Size = new System.Drawing.Size(100, 21);
             this.lbl_MIDI.TabIndex = 0;
             this.lbl_MIDI.Text = "MIDI MENU";
-            // 
-            // cmb_MIDI_InList
-            // 
-            this.cmb_MIDI_InList.FormattingEnabled = true;
-            this.cmb_MIDI_InList.Location = new System.Drawing.Point(3, 13);
-            this.cmb_MIDI_InList.Name = "cmb_MIDI_InList";
-            this.cmb_MIDI_InList.Size = new System.Drawing.Size(152, 21);
-            this.cmb_MIDI_InList.TabIndex = 1;
-            this.cmb_MIDI_InList.Text = "Select MIDI In Device";
-            this.cmb_MIDI_InList.Click += new System.EventHandler(this.cmb_MIDI_InList_Click);
             // 
             // Form1
             // 
